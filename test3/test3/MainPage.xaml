@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:test3;assembly=test3"
+             x:Class="test3.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:GyroscopeTest x:Key="gyro" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Label Text="X:" FontSize="Title" Padding="30,10,30,10"/>
+        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=X}" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Y:" FontSize="Title" Padding="30,10,30,10"/>
+        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Y}" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Z:" FontSize="Title" Padding="30,10,30,10"/>
+        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Z}" FontSize="Title" Padding="30,10,30,10"/>
+        <Button x:Name="button1" Text="Старт" Clicked="Button_Click" />
+    </StackLayout>
+
+</ContentPage>
