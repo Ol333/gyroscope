@@ -13,13 +13,14 @@
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
+        <Button x:Name="button1" Text="Старт" Clicked="Button_Click" />
         <Label Text="X:" FontSize="Title" Padding="30,10,30,10"/>
         <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=X}" FontSize="Title" Padding="30,10,30,10"/>
         <Label Text="Y:" FontSize="Title" Padding="30,10,30,10"/>
         <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Y}" FontSize="Title" Padding="30,10,30,10"/>
         <Label Text="Z:" FontSize="Title" Padding="30,10,30,10"/>
-        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Z}" FontSize="Title" Padding="30,10,30,10"/>
-        <Button x:Name="button1" Text="Старт" Clicked="Button_Click" />
+        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Z}" FontSize="Title" Padding="30,10,30,10"/>        
+        <Button x:Name="button2" Text="Сохранить" Clicked="Button_Click_2" />
     </StackLayout>
 
 </ContentPage>

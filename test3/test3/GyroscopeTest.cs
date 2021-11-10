@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
 using System.ComponentModel;
+using System.IO;
 
 namespace test3
 {
     public class GyroscopeTest : INotifyPropertyChanged
     {
+        public List<string> gyroInfos;
         // Set speed delay for monitoring changes.
         SensorSpeed speed = SensorSpeed.UI;
+
         private double x = 0;
         public double X
         {
@@ -62,6 +65,7 @@ namespace test3
         {
             // Register for reading changes.
             Gyroscope.ReadingChanged += Gyroscope_ReadingChanged;
+            gyroInfos = new List<string>();
         }
 
         void Gyroscope_ReadingChanged(object sender, GyroscopeChangedEventArgs e)
@@ -72,6 +76,7 @@ namespace test3
             Y += (180 / Math.PI) * data.AngularVelocity.Y / 15;
             Z += (180 / Math.PI) * data.AngularVelocity.Z / 15;
             //Console.WriteLine(DateTime.Now); // 15 раз в секунду +-1 раз
+            gyroInfos.Add(DateTime.Now.ToString() + ' ' + Z.ToString());
             Console.WriteLine($"Reading: X: {data.AngularVelocity.X}, Y: {data.AngularVelocity.Y}, Z: {data.AngularVelocity.Z}");
         }
 
