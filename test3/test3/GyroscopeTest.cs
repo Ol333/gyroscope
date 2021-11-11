@@ -16,7 +16,7 @@ namespace test3
         private double z = 0;
         public double Z
         {
-            get { return Math.Round(z, 2); }
+            get { return Math.Round(z, 7); }
             set
             {
                 if (z != value)
@@ -55,7 +55,7 @@ namespace test3
             var data = e.Reading;
             // Process Angular Velocity Z reported in rad/s
             double temp = (180 / Math.PI) * data.AngularVelocity.Z / 15;
-            if (Math.Abs(temp) > 0.001)
+            if (Math.Abs(temp) > 0.01)
                 Z += temp;
             //Console.WriteLine(DateTime.Now); // 15 раз в секунду +-1 раз
             DependencyService.Get<IWriteFile>().MyWriteTxtFile(DateTime.Now.ToString() + " | " + Z.ToString() + '\n');
