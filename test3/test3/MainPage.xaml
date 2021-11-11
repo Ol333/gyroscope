@@ -11,16 +11,20 @@
 
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Label Text="Установите телефон в начальное положение и нажмите Старт" HorizontalTextAlignment="Center" TextColor="White" FontSize="24"/>
         </Frame>
         <Button x:Name="button1" Text="Старт" Clicked="Button_Click" />
-        <Label Text="X:" FontSize="Title" Padding="30,10,30,10"/>
-        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=X}" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Y:" FontSize="Title" Padding="30,10,30,10"/>
-        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Y}" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Z:" FontSize="Title" Padding="30,10,30,10"/>
-        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Z}" FontSize="Title" Padding="30,10,30,10"/>        
-        <Button x:Name="button2" Text="Сохранить" Clicked="Button_Click_2" />
+        <Label Text="Угол поворота:" FontSize="Title" Padding="30,10,30,10"/>
+        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Z}" FontSize="Title" Padding="30,10,30,10"/>
+        <Polyline Points="200 10,200 40,170 40,230 40,200 40,200 70"
+                Stroke="DarkBlue"
+                StrokeThickness="10"
+                BindingContext="{DynamicResource gyro}"
+                Rotation="{Binding Path=Z}"
+                x:Name="horisontal"  />
+        <Label Text="Количество поворотов:" FontSize="Title" Padding="30,10,30,10"/>
+        <Label BindingContext="{DynamicResource gyro}" Text="{Binding Path=Z_circle}" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Показания гироскопа с временными отметками сохраняются в файл, расположенный по пути: /storage/emulated/0/Android/data/com.companyname/test3/log.txt или если смотреть со смартфона: Android/data/com.companyname.test3/log.txt" Padding="30,10,30,10"/>
     </StackLayout>
 
 </ContentPage>

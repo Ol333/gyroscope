@@ -4,53 +4,35 @@ using System.Text;
 using Xamarin.Essentials;
 using System.ComponentModel;
 using System.IO;
+using Xamarin.Forms;
 
 namespace test3
 {
     public class GyroscopeTest : INotifyPropertyChanged
     {
-        public List<string> gyroInfos;
         // Set speed delay for monitoring changes.
         SensorSpeed speed = SensorSpeed.UI;
-
-        private double x = 0;
-        public double X
-        {
-            get { return x; }
-            set
-            {
-                if (x != value)
-                { 
-                    x = value;
-                    OnPropertyChanged("X");
-                }
-            }
-        }
-        private double y = 0;
-        public double Y
-        {
-            get { return y; }
-            set
-            {
-                if (y != value)
-                {
-                    y = value;
-                    OnPropertyChanged("Y");
-                }
-            }
-        }
 
         private double z = 0;
         public double Z
         {
-            get { return z; }
+            get { return Math.Round(z, 2); }
             set
             {
                 if (z != value)
                 {
                     z = value;
                     OnPropertyChanged("Z");
+                    OnPropertyChanged("Z_circle");
                 }
+            }
+        }
+        public double Z_circle
+        {
+            get 
+            {
+                double temp = z % 360;
+                return Math.Round(((int)z - temp) / 360); 
             }
         }
 
@@ -65,19 +47,17 @@ namespace test3
         {
             // Register for reading changes.
             Gyroscope.ReadingChanged += Gyroscope_ReadingChanged;
-            gyroInfos = new List<string>();
+            //gyroInfos = new List<string>();
         }
 
         void Gyroscope_ReadingChanged(object sender, GyroscopeChangedEventArgs e)
         {
             var data = e.Reading;
-            // Process Angular Velocity X, Y, and Z reported in rad/s
-            X += (180 / Math.PI) * data.AngularVelocity.X / 15;
-            Y += (180 / Math.PI) * data.AngularVelocity.Y / 15;
+            // Process Angular Velocity Z reported in rad/s
             Z += (180 / Math.PI) * data.AngularVelocity.Z / 15;
             //Console.WriteLine(DateTime.Now); // 15 раз в секунду +-1 раз
-            gyroInfos.Add(DateTime.Now.ToString() + ' ' + Z.ToString());
-            Console.WriteLine($"Reading: X: {data.AngularVelocity.X}, Y: {data.AngularVelocity.Y}, Z: {data.AngularVelocity.Z}");
+            DependencyService.Get<IWriteFile>().MyWriteTxtFile(DateTime.Now.ToString() + " | " + Z.ToString() + '\n');
+            //Console.WriteLine($"Reading: X: {data.AngularVelocity.X}, Y: {data.AngularVelocity.Y}, Z: {data.AngularVelocity.Z}");
         }
 
         public void ToggleGyroscope()
@@ -89,18 +69,18 @@ namespace test3
                 else
                 {
                     Gyroscope.Start(speed);
-                    X = 0;
-                    Y = 0;
                     Z = 0;
                 }
             }
             catch (FeatureNotSupportedException fnsEx)
             {
                 // Feature not supported on device
+                DependencyService.Get<IWriteFile>().MyWriteTxtFile("Неизвестная ошибка " + fnsEx.ToString() + '\n');
             }
             catch (Exception ex)
             {
                 // Other error has occurred.
+                DependencyService.Get<IWriteFile>().MyWriteTxtFile("Ошибка " + ex.ToString() + '\n');
             }
         }
     }

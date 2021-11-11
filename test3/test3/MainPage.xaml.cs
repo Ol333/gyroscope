@@ -23,10 +23,5 @@ namespace test3
                 button1.Text = "Старт";
             (this.Resources["gyro"] as GyroscopeTest).ToggleGyroscope();
         }
-
-        private void Button_Click_2(object sender, EventArgs e)
-        {
-            DependencyService.Get<IWriteFile>().MyWriteTxtFile((this.Resources["gyro"] as GyroscopeTest).gyroInfos);
-        }
     }
 }

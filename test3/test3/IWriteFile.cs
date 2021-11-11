@@ -6,6 +6,6 @@ namespace test3
 {
     public interface IWriteFile
     {
-        void MyWriteTxtFile(List<string> infos);
+        void MyWriteTxtFile(string infos);
     }
 }

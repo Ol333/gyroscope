@@ -14,20 +14,14 @@ namespace test3.Droid
 {
     class WriteFile : IWriteFile
     {
-        public void MyWriteTxtFile(List<string> infos)
+        public void MyWriteTxtFile(string s)
         {
             //throw new NotImplementedException();
             var filename = Path.Combine(Android.App.Application.Context.GetExternalFilesDir("").AbsolutePath, "log.txt");
-            StringBuilder s = new StringBuilder();
-            // build the data in memory
-            foreach (string st in infos)
-            {
-                s = s.AppendLine(st);
-            }
             if (File.Exists(filename))
-                File.AppendAllText(filename, s.ToString());
+                File.AppendAllText(filename, s);
             else
-                File.WriteAllText(filename, s.ToString());
+                File.WriteAllText(filename, s);
         }
     }
 }
