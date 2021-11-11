@@ -54,7 +54,9 @@ namespace test3
         {
             var data = e.Reading;
             // Process Angular Velocity Z reported in rad/s
-            Z += (180 / Math.PI) * data.AngularVelocity.Z / 15;
+            double temp = (180 / Math.PI) * data.AngularVelocity.Z / 15;
+            if (Math.Abs(temp) > 0.001)
+                Z += temp;
             //Console.WriteLine(DateTime.Now); // 15 раз в секунду +-1 раз
             DependencyService.Get<IWriteFile>().MyWriteTxtFile(DateTime.Now.ToString() + " | " + Z.ToString() + '\n');
             //Console.WriteLine($"Reading: X: {data.AngularVelocity.X}, Y: {data.AngularVelocity.Y}, Z: {data.AngularVelocity.Z}");
